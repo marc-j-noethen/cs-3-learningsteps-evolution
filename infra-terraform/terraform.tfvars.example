@@ -1,0 +1,10 @@
+project_name        = "learningsteps"
+environment         = "dev"
+location            = "westeurope"
+resource_group_name = "rg-learningsteps-evolution-dev"
+
+tags = {
+  project     = "learningsteps-evolution"
+  environment = "dev"
+  managed_by  = "terraform"
+}

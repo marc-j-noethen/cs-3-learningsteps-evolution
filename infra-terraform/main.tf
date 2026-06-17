@@ -70,3 +70,22 @@ resource "azurerm_key_vault" "main" {
   public_network_access_enabled = true
   tags                          = var.tags
 }
+resource "azurerm_kubernetes_cluster" "main" {
+  name                = "aks-${var.project_name}-${var.environment}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  dns_prefix          = "aks-${var.project_name}-${var.environment}"
+
+  default_node_pool {
+    name           = "system"
+    node_count     = 1
+    vm_size        = "Standard_B2s"
+    vnet_subnet_id = azurerm_subnet.aks.id
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  tags = var.tags
+}

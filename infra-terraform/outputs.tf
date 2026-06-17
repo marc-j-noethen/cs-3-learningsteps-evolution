@@ -17,3 +17,13 @@ output "acr_login_server" {
   description = "Login server of the Azure Container Registry."
   value       = azurerm_container_registry.main.login_server
 }
+
+output "aks_cluster_name" {
+  description = "Name of the AKS cluster."
+  value       = azurerm_kubernetes_cluster.main.name
+}
+
+output "aks_node_resource_group" {
+  description = "Auto-created node resource group used by AKS."
+  value       = azurerm_kubernetes_cluster.main.node_resource_group
+}

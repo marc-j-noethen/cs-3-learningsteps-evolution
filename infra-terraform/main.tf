@@ -158,3 +158,11 @@ resource "azurerm_role_assignment" "aks_acr_pull" {
   role_definition_name = "AcrPull"
   principal_id         = azurerm_kubernetes_cluster.main.kubelet_identity[0].object_id
 }
+
+resource "azurerm_key_vault_secret" "database_url" {
+  name = "database-url"
+
+  value = "postgresql://${var.postgres_admin_username}:${random_password.postgres_admin.result}@${azurerm_postgresql_flexible_server.main.fqdn}:5432/${var.postgres_database_name}?sslmode=require"
+
+  key_vault_id = azurerm_key_vault.main.id
+}

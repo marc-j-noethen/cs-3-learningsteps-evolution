@@ -118,8 +118,21 @@ resource "azurerm_key_vault" "main" {
   soft_delete_retention_days    = 7
   purge_protection_enabled      = false
   public_network_access_enabled = true
-  tags                          = var.tags
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    secret_permissions = [
+      "Get",
+      "List",
+      "Set",
+      "Delete"
+    ]
+  }
+
+  tags = var.tags
 }
+
 resource "azurerm_kubernetes_cluster" "main" {
   name                = "aks-${var.project_name}-${var.environment}"
   location            = azurerm_resource_group.main.location

@@ -66,6 +66,7 @@ resource "azurerm_postgresql_flexible_server" "main" {
   name                          = "psql-${var.project_name}-${var.environment}-${random_string.suffix.result}"
   resource_group_name           = azurerm_resource_group.main.name
   location                      = azurerm_resource_group.main.location
+  zone                          = "2"
   version                       = "16"
   delegated_subnet_id           = azurerm_subnet.postgres.id
   private_dns_zone_id           = azurerm_private_dns_zone.postgres.id

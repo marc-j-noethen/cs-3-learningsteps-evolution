@@ -31,3 +31,21 @@ variable "tags" {
     managed_by  = "terraform"
   }
 }
+
+variable "postgres_admin_username" {
+  description = "Administrator username for PostgreSQL."
+  type        = string
+  default     = "learningstepsadmin"
+}
+
+variable "postgres_database_name" {
+  description = "Name of the application database."
+  type        = string
+  default     = "learning_journal"
+}
+
+variable "postgres_sku_name" {
+  description = "Compute SKU used by PostgreSQL Flexible Server."
+  type        = string
+  default     = "B_Standard_B1ms"
+}
